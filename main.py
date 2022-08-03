@@ -7,27 +7,42 @@ class App(ShowBase):
 
         self.cm = CardMaker("squares") # cm for card maker
 
-        squares = self.aspect2d.attachNewNode('squares') 
+        self.squares = self.aspect2d.attachNewNode('squares') 
 
-        # Red Square on upper left quarter
-        self.cm.setFrame(-1, 0, 1, 0)
-        square = squares.attachNewNode(self.cm.generate())
-        square.setColor(255,0,0,1)
+        res = [5,5] # [x,y]
+        x = 2 # abs lenght from left to right
+        y = 2 # abs heigh from up to down
 
-        # Blue Square on upper right quarter
-        self.cm.setFrame(0, 1, 1, 0)
-        square = squares.attachNewNode(self.cm.generate())
-        square.setColor(0,0,255,1)
+        cx = x/res[0]
+        cy = y/res[1]
+        toggle = False
+        for resY in range(res[1]):
+            for resX in range(res[0]):
+                left = -1 + cx*resX
+                right = -1 + cx*(resX+1)
+                bot = -1 + cy*(resY+1)
+                top = -1 + cy*resY
+                
+                if toggle:
+                    self.blue_square(left, right, bot, top)
+                else:
+                    self.red_square(left, right, bot, top)
+                
+                toggle = not toggle
+                print(toggle)
 
-        # Blue Square on lower left quarter
-        self.cm.setFrame(-1, 0, 0, -1)
-        square = squares.attachNewNode(self.cm.generate())
-        square.setColor(0,0,255,1)
+        
 
-        # Red Square on lower right quarter
-        self.cm.setFrame(0, 1, 0, -1)
-        square = squares.attachNewNode(self.cm.generate())
-        square.setColor(255,0,0,1)
+    def blue_square(self,left, right, bot, top):
+        self.cm.setFrame(left, right, bot, top)
+        self.square = self.squares.attachNewNode(self.cm.generate())
+        self.square.setColor(0,0,255,1)
+
+    def red_square(self,left, right, bot, top):
+        self.cm.setFrame(left, right, bot, top)
+        self.square = self.squares.attachNewNode(self.cm.generate())
+        self.square.setColor(255,0,0,1)
+
 
 app = App()
 app.run()
