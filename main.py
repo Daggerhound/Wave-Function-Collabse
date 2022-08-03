@@ -1,0 +1,2 @@
+import panda3d
+
