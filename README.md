@@ -1,2 +1,3 @@
 # Wave-Function-Collabse
-# Wave-Function-Collabse
+
+Fuck https github
