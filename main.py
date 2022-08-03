@@ -6,12 +6,12 @@ class App(ShowBase):
         ShowBase.__init__(self)
 
         self.cm = CardMaker("squares") # cm for card maker
-        self.cm.setFrame(-0.5,0.5,-0.5,0.5)
+        self.cm.setFrame(-0.5,0.5,-0.5,0.5) # sets size
 
-        myFrames = self.aspect2d.attachNewNode('frames')
+        squares = self.aspect2d.attachNewNode('squares') 
 
-        myFrame = myFrames.attachNewNode(self.cm.generate())
-        myFrame.setColor(255,0,0,1)
+        square = squares.attachNewNode(self.cm.generate())
+        square.setColor(255,0,0,1)
 
 
 app = App()
