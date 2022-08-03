@@ -1,4 +1,4 @@
-from panda3d.core import CardMaker, NodePath
+from panda3d.core import CardMaker
 from direct.showbase.ShowBase import ShowBase
 
 class App(ShowBase):
