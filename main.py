@@ -9,7 +9,7 @@ class App(ShowBase):
 
         self.squares = self.aspect2d.attachNewNode('squares') 
 
-        res = [5,5] # [x,y]
+        res = [11,11] # [x,y]
         x = 2 # abs lenght from left to right
         y = 2 # abs heigh from up to down
 
@@ -29,7 +29,9 @@ class App(ShowBase):
                     self.red_square(left, right, bot, top)
                 
                 toggle = not toggle
-                print(toggle)
+
+            if res[0] % 2 == 0:
+                toggle = not resY%2
 
         
 
