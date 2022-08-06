@@ -45,8 +45,8 @@ class Grid(ShowBase):
             for resX in range(self.res[0]):
                 left   = -1 + cx * resX
                 right  = -1 + cx * (resX + 1)
-                bottom = -1 - cy * (resY + 1)
-                top    = -1 - cy * resY
+                bottom =  1 - cy * (resY + 1)
+                top    =  1 - cy * resY
                 
                 framing = Vec4(left, right, bottom, top)
 
