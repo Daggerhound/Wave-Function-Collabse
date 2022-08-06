@@ -37,12 +37,12 @@ class Grid(ShowBase):
         width  = 2 # abs length from left to right
         height = 2 # abs height from up to down
 
-        cx =  width/self.res[0] # Needs better name
-        cy = height/self.res[1] # Needs better name
+        cx =  width/self.dim[0] # Needs better name
+        cy = height/self.dim[1] # Needs better name
 
         toggle = False
-        for resY in range(self.res[1]):
-            for resX in range(self.res[0]):
+        for resY in range(self.dim[1]):
+            for resX in range(self.dim[0]):
                 left   = -1 + cx * resX
                 right  = -1 + cx * (resX + 1)
                 bottom =  1 - cy * (resY + 1)
@@ -56,5 +56,5 @@ class Grid(ShowBase):
 
                 toggle = not toggle
 
-            if self.res[0] % 2 == 0:
+            if self.dim[0] % 2 == 0:
                 toggle = not resY%2
