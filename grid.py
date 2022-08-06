@@ -1,6 +1,6 @@
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import CardMaker, Vec4
-
+from cell import Cell
 
 # constants
 BLUE  = (0  , 0, 255, 1) # RGBA
@@ -58,17 +58,3 @@ class Grid(ShowBase):
 
             if self.res[0] % 2 == 0:
                 toggle = not resY%2
-
-
-class Cell:
-    def __init__(self, x, y, square):
-        self.x = x
-        self.y = y
-        self.square = square
-        self.choices = 0 # entropy, should be length of tileset by default 
-
-    def show(self):
-        self.square.show()
-
-    def hide(self):
-        self.square.hide()
