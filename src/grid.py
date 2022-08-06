@@ -8,9 +8,9 @@ RED   = (255, 0,   0, 1) # RGBA
 
 
 class Grid(ShowBase):
-    def __init__(self, res):
+    def __init__(self, dim):
         ShowBase.__init__(self)
-        self.res = res
+        self.dim = dim
         
         self.cm = CardMaker("grid")
         self.squares = self.aspect2d.attachNewNode('squares') 
@@ -21,7 +21,7 @@ class Grid(ShowBase):
             case 1: # self[10]
                 return self.grid[indexes[0]]
             case 2: # self[2][5]
-                return self.grid[indexes[0] * indexes[1]]
+                return self.grid[indexes[0] + self.dim[1] * indexes[1]]
             case length:
                 if length <= 0:
                     raise IndexError("[ERROR] Amount of indexes given insufficient.")
