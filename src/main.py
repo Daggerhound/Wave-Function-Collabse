@@ -11,7 +11,7 @@ class App:
         self.grid.generate()
 
         # self.grid.grid[1].hide()
-        # self.grid[1].hide()
+        self.grid[1].hide()
 
         cell = self.grid[1,1]
         ng = self.grid.get_neighbours(cell)

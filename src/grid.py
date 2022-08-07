@@ -19,15 +19,15 @@ class Grid(ShowBase):
         self.grid = []
 
     def __getitem__(self, indexes):
-        match len(indexes):
-            case 1: # self[10]
-                return self.grid[indexes]
-            case 2: # self[2][5]
+        tint = type(1)
+        ttuple = type((1,2))
+        match type(indexes):
+            case tint: # self[10]
+                return self.grid[indexes[0]]
+            case ttuple: # self[2,5]
                 return self.grid[indexes[0] + self.dim[1] * indexes[1]]
-            case length:
-                if length <= 0:
-                    raise IndexError("[ERROR] Amount of indexes given insufficient.")
-                raise IndexError("[ERROR] Too many indexes given.")
+            case data_type:
+                raise TypeError(f"[ERROR] Type {data_type} not supported.")
 
     def make_tile(self, framing, texture):
         self.cm.setFrame(framing)
