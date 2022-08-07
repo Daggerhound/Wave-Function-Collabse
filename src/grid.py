@@ -19,15 +19,12 @@ class Grid(ShowBase):
         self.grid = []
 
     def __getitem__(self, indexes):
-        tint = type(1)
-        ttuple = type((1,2))
-        match type(indexes):
-            case tint: # self[10]
-                return self.grid[indexes[0]]
-            case ttuple: # self[2,5]
-                return self.grid[indexes[0] + self.dim[1] * indexes[1]]
-            case data_type:
-                raise TypeError(f"[ERROR] Type {data_type} not supported.")
+        if isinstance(indexes, int):
+            return self.grid[indexes]
+        elif isinstance(indexes, tuple):
+            return self.grid[indexes[0] + self.dim[1] * indexes[1]]
+        else:
+            raise TypeError(f"[ERROR] Type {type(indexes)} not supported for indexing grid.")
 
     def make_tile(self, framing, texture):
         self.cm.setFrame(framing)
