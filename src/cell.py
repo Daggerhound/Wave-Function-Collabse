@@ -6,7 +6,7 @@ class Cell:
         self.choices = 0 # entropy, should be length of tileset by default 
     
     def show(self):
-        self.square.show()
+        self.tile.show()
 
     def hide(self):
-        self.square.hide()
+        self.tile.hide()

@@ -1,6 +1,8 @@
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import CardMaker, Vec4
 from cell import Cell
+from tile import Tile
+import numpy as np
 
 # constants
 BLUE  = (0  , 0, 255, 1) # RGBA
@@ -34,29 +36,14 @@ class Grid(ShowBase):
         return tile
 
     def generate(self):
-        width  = 2 # abs length from left to right
-        height = 2 # abs height from up to down
-
-        cx =  width/self.dim[0] # Needs better name
-        cy = height/self.dim[1] # Needs better name
+        Tile.WIDTH  = 2/self.dim[0] # 2 being the absolute length of screen
+        Tile.HEIGHT = 2/self.dim[1] # 2 being the absolute height of screen
 
         blank = self.loader.loadTexture("../tiles/blank.png")
-
-        toggle = False
-        for resY in range(self.dim[1]):
-            for resX in range(self.dim[0]):
-                left   = -1 + cx * resX
-                right  = -1 + cx * (resX + 1)
-                bottom =  1 - cy * (resY + 1)
-                top    =  1 - cy * resY
-                
-                framing = Vec4(left, right, bottom, top)
-
+            
+        for i, x in enumerate(np.arange(-1, 1, Tile.WIDTH)):
+            for j, y in enumerate(np.arange(1, -1, -Tile.HEIGHT)):
+                framing = Vec4(x, x + Tile.WIDTH, y - Tile.HEIGHT, y)
                 tile = self.make_tile(framing, blank)
-                cell = Cell(resX, resY, tile)
+                cell = Cell(i, j, tile)
                 self.grid.append(cell)
-
-                toggle = not toggle
-
-            if self.dim[0] % 2 == 0:
-                toggle = not resY%2
