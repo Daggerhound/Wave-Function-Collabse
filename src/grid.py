@@ -18,10 +18,10 @@ class Grid(ShowBase):
         self.tiles = self.aspect2d.attachNewNode('squares') 
         self.grid = []
 
-    def __getitem__(self, *indexes):
+    def __getitem__(self, indexes):
         match len(indexes):
             case 1: # self[10]
-                return self.grid[indexes[0]]
+                return self.grid[indexes]
             case 2: # self[2][5]
                 return self.grid[indexes[0] + self.dim[1] * indexes[1]]
             case length:
@@ -35,14 +35,26 @@ class Grid(ShowBase):
         tile.setTexture(texture)
         return tile
 
+    def get_neighbours(self, cell):
+        x = cell.x
+        y = cell.y
+
+        left = self[x-1,y]
+        right = self[x+1,y]
+        top = self[x,y-1]
+        bot = self[x,y+1]
+
+        return [left, right, top, bot]
+
+
     def generate(self):
         Tile.WIDTH  = 2/self.dim[0] # 2 being the absolute length of screen
         Tile.HEIGHT = 2/self.dim[1] # 2 being the absolute height of screen
 
         blank = self.loader.loadTexture("../tiles/blank.png")
             
-        for i, x in enumerate(np.arange(-1, 1, Tile.WIDTH)):
-            for j, y in enumerate(np.arange(1, -1, -Tile.HEIGHT)):
+        for j, y in enumerate(np.arange(1, -1, -Tile.HEIGHT)):
+            for i, x in enumerate(np.arange(-1, 1, Tile.WIDTH)):
                 framing = Vec4(x, x + Tile.WIDTH, y - Tile.HEIGHT, y)
                 tile = self.make_tile(framing, blank)
                 cell = Cell(i, j, tile)
