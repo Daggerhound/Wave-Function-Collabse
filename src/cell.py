@@ -1,8 +1,8 @@
 class Cell:
-    def __init__(self, x, y, square):
+    def __init__(self, x, y, tile):
         self.x = x
         self.y = y
-        self.square = square # will be changed to self.tile later
+        self.tile = tile # will be changed to self.tile later
         self.choices = 0 # entropy, should be length of tileset by default 
     
     def show(self):

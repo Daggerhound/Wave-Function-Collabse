@@ -13,7 +13,7 @@ class Grid(ShowBase):
         self.dim = dim
         
         self.cm = CardMaker("grid")
-        self.squares = self.aspect2d.attachNewNode('squares') 
+        self.tiles = self.aspect2d.attachNewNode('squares') 
         self.grid = []
 
     def __getitem__(self, *indexes):
@@ -27,11 +27,11 @@ class Grid(ShowBase):
                     raise IndexError("[ERROR] Amount of indexes given insufficient.")
                 raise IndexError("[ERROR] Too many indexes given.")
 
-    def add_square(self, framing, color):
+    def make_tile(self, framing, texture):
         self.cm.setFrame(framing)
-        square = self.squares.attachNewNode(self.cm.generate())
-        square.setColor(color)
-        return square
+        tile = self.tiles.attachNewNode(self.cm.generate())
+        tile.setTexture(texture)
+        return tile
 
     def generate(self):
         width  = 2 # abs length from left to right
@@ -39,6 +39,8 @@ class Grid(ShowBase):
 
         cx =  width/self.dim[0] # Needs better name
         cy = height/self.dim[1] # Needs better name
+
+        blank = self.loader.loadTexture("../tiles/blank.png")
 
         toggle = False
         for resY in range(self.dim[1]):
@@ -50,8 +52,8 @@ class Grid(ShowBase):
                 
                 framing = Vec4(left, right, bottom, top)
 
-                square = self.add_square(framing, [RED, BLUE][toggle])
-                cell = Cell(resX, resY, square)
+                tile = self.make_tile(framing, blank)
+                cell = Cell(resX, resY, tile)
                 self.grid.append(cell)
 
                 toggle = not toggle
