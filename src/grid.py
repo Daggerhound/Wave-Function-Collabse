@@ -2,6 +2,7 @@ from direct.showbase.ShowBase import ShowBase
 from panda3d.core import CardMaker, Vec4
 from cell import Cell
 from tile import Tile
+from __getpath import getPath
 import numpy as np
 
 # constants
@@ -10,7 +11,7 @@ RED   = (255, 0,   0, 1) # RGBA
 
 
 class Grid(ShowBase):
-    def __init__(self, dim):
+    def __init__(self, dim, rules):
         ShowBase.__init__(self)
         self.dim = dim
         
@@ -48,7 +49,7 @@ class Grid(ShowBase):
         Tile.WIDTH  = 2/self.dim[0] # 2 being the absolute length of screen
         Tile.HEIGHT = 2/self.dim[1] # 2 being the absolute height of screen
 
-        blank = self.loader.loadTexture("../tiles/blank.png")
+        blank = self.loader.loadTexture(f"{getPath(2)}/tiles/blank.png")
             
         for j, y in enumerate(np.arange(1, -1, -Tile.HEIGHT)):
             for i, x in enumerate(np.arange(-1, 1, Tile.WIDTH)):
