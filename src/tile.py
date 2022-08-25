@@ -5,3 +5,4 @@ class Tile:
     def __init__(self, name, *edges):
         self.LEFT, self.RIGHT, self.BOTTOM, self.TOP = edges
         self.IMG = f"{getPath(2)}/tiles/{name}.png"
+        self.name = name

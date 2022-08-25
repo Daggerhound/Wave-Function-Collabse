@@ -14,6 +14,7 @@ class Grid(ShowBase):
     def __init__(self, dim, rules):
         ShowBase.__init__(self)
         self.dim = dim
+        self.rules = rules
         
         self.cm = CardMaker("grid")
         self.tiles = self.aspect2d.attachNewNode('squares') 
@@ -57,3 +58,23 @@ class Grid(ShowBase):
                 tile = self.make_tile(framing, blank)
                 cell = Cell(i, j, tile)
                 self.grid.append(cell)
+
+    def update(self):
+        threashold = 3 #idk if needed
+        possibilities = np.empty((self.dim[1], self.dim[0]))
+        possibilities[:] = 0 # overwriting values casue above gives something random
+
+        keys = self.rules.keys()
+
+        for y in range(self.dim[1]):
+            for x in range(self.dim(0)):
+                val = len(self.rules)
+                if not (x-1 < 0):
+                    pass
+                if not (x+1 > self.dim[0]):
+                    pass
+                if not (y-1 < 0):
+                    pass
+                if not (y+1 > self.dim[1]):
+                    pass
+
